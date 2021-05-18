@@ -1,0 +1,22 @@
+// 高德地图已有绑定的事件
+export default [
+  'complete',
+  'zoomstart',
+  'zoomend',
+  'mapmove',
+  'movestart',
+  'moveend',
+  'resize',
+  'click',
+  'dblclick',
+  'mousemove',
+  'mouseover',
+  'mouseout',
+  'mouseup',
+  'mousedown',
+  'mousewheel',
+  'rightclick',
+  'touchstart',
+  'touchmove',
+  'touchend',
+]
