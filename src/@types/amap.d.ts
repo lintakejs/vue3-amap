@@ -3750,6 +3750,7 @@ declare global {
      * @private
      */
     export interface LineSharedOptions {
+      map?: Map_2
       zIndex?: number
       bubble?: boolean
       cursor?: string
@@ -5137,6 +5138,15 @@ declare global {
        */
       resumeMove(): void
     }
+    /**
+     * @public
+     * @class MarkerShape
+     * @name MarkerShape
+     * @param {coords?: Array.<Number>, type?: string}
+     */
+    export class MarkerShape {
+      constructor(opts?: { coords?: Array<Number>; type?: string })
+    }
 
     /**
      * 点标记属性
@@ -5813,6 +5823,7 @@ declare global {
      * @public
      */
     export interface PolygonSharedOptions {
+      map?: Map_2
       zIndex?: number
       bubble?: boolean
       cursor?: string
@@ -5943,6 +5954,23 @@ declare global {
      */
     export type PolylineOptions = LineSharedOptions & {
       path?: LngLatLike[] | LngLatLike[][]
+    }
+    /**
+     * @public 编辑折线类
+     */
+    export class PolylineEditor extends CoreEditor {
+      constructor(map: Map_2, polygon?: Polyline, opts?: any)
+    }
+    /**
+     * @public 编辑多边形类
+     */
+    export class PolygonEditor extends CoreEditor {
+      constructor(map: Map_2, polygon?: Polygon, opts?: any)
+    }
+
+    export class CoreEditor {
+      open(): void
+      close(): void
     }
 
     /**

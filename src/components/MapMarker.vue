@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { defineComponent } from 'vue'
-import { initAmapComponent, useRegisterComponent } from '../hooks'
+import { useRegisterComponent } from '../hooks'
 
 export default defineComponent({
   name: 'VMapMarker',
@@ -30,18 +30,37 @@ export default defineComponent({
     'label',
     'events',
     'onceEvents',
+    // 其他属性
   ],
 
   setup(props, { expose }) {
-    const { getAmapInstancePromise } = useRegisterComponent(props)
-
-    const { amapComponent } = initAmapComponent(
-      getAmapInstancePromise,
-      (amapInstance) => {
+    const { amapComponent } = useRegisterComponent(
+      props,
+      (amapInstance, convertProps) => {
         return new AMap.Marker({
-          ...props,
+          ...convertProps,
           map: amapInstance,
         })
+      },
+      {
+        converters: {
+          shape: (options) => {
+            return new AMap.MarkerShape(options)
+          },
+          shadow: (options) => {
+            return new AMap.Icon(options)
+          },
+        },
+        handlers: {
+          zIndex: (nz) => {
+            amapComponent.value?.setzIndex(nz)
+          },
+          visible: (v) => {
+            v === false
+              ? amapComponent.value?.hide()
+              : amapComponent.value?.show()
+          },
+        },
       }
     )
 

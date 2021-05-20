@@ -9,12 +9,14 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "uppercamelcase": "^3.0.0",
     "vue": "^3.0.5"
   },
   "devDependencies": {
     "@rollup/plugin-eslint": "^8.0.1",
     "@rollup/plugin-typescript": "^8.2.1",
     "@types/node": "^15.0.2",
+    "@types/uppercamelcase": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "@vitejs/plugin-vue": "^1.2.2",

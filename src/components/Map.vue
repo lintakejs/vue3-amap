@@ -1,8 +1,9 @@
 <script lang="tsx">
-import { defineComponent, renderSlot, useCssModule, watch } from 'vue'
+import { defineComponent, renderSlot, useCssModule } from 'vue'
 import { lazyMapApiLoaderInstance } from '../services/injected-map-api'
 import { guid } from '../utils/guid'
-import { useRegisterComponent } from '../hooks'
+import { convertProps, useRegisterComponent } from '../hooks'
+import { toLngLat } from '../utils/cover-helper'
 
 export default defineComponent({
   name: 'VMap',
@@ -47,33 +48,48 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const mapApiLoadPromise = lazyMapApiLoaderInstance?.loader()
     const mapUid = guid()
+
+    const converters = {
+      center: (arr: number[]) => {
+        return toLngLat(arr)
+      },
+    }
     // 获取地图实例的promise，异步加载
     const amapPromise = new Promise<AMap.Map>((resolve) => {
       mapApiLoadPromise?.then(() => {
-        resolve(new AMap.Map(mapUid, props))
+        resolve(new AMap.Map(mapUid, convertProps(props, converters)))
       })
     })
 
-    const { amapInstance, getAmapInstancePromise } = useRegisterComponent(
+    const { amapInstance } = useRegisterComponent(
       props,
+      (amapInstance) => {
+        return amapInstance
+      },
+      {
+        converters,
+        handlers: {
+          zoom: (flag) => {
+            amapInstance.value?.setStatus({
+              zoomEnable: flag,
+            })
+          },
+          dragEnable: (flag) => {
+            amapInstance.value?.setStatus({
+              dragEnable: flag,
+            })
+          },
+          rotateEnable: (flag) => {
+            amapInstance.value?.setStatus({
+              rotateEnable: flag,
+            })
+          },
+        },
+      },
       amapPromise
-    )
-    /**
-     * @description 动态响应式地图配置
-     */
-    watch(
-      () => [props.zoom, props.dragEnable, props.rotateEnable],
-      (new_status) => {
-        amapInstance.value?.setStatus({
-          zoomEnable: new_status[0],
-          dragEnable: new_status[1],
-          rotateEnable: new_status[2],
-        })
-      }
     )
 
     expose({
-      getAmapInstancePromise,
       amapInstance,
     })
 

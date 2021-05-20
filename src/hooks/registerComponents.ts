@@ -4,38 +4,32 @@ import {
   onUnmounted,
   provide,
   shallowRef,
-  watch,
-} from '@vue/runtime-core'
-import { AmapComponentProp, MapInstance } from '../@types/common'
+  WatchStopHandle,
+} from 'vue'
+import { Converters, Handlers, MapInstance } from '../@types/common'
 import { AmapPromise } from '../config/symbolVariable'
-import { eventHelper } from '../utils/event-helper'
+import { convertProps } from './coverProps'
+import { setPropWatchers, unInstallWatchFns, unregisterEvents } from './'
 
-function registerEvents(amapInstance: MapInstance, props: AmapComponentProp) {
-  if (props.events) {
-    for (const eventName in props.events) {
-      eventHelper.addListener(amapInstance, eventName, props.events[eventName])
-    }
-  }
-  if (props.onceEvents) {
-    for (const eventName in props.onceEvents) {
-      eventHelper.addListenerOnce(
-        amapInstance,
-        eventName,
-        props.onceEvents[eventName]
-      )
-    }
-  }
-}
-
-function unregisterEvents(amapInstance: MapInstance) {
-  eventHelper.clearListeners(amapInstance)
-}
-
-export function useRegisterComponent(
-  props: AmapComponentProp,
+export function useRegisterComponent<
+  T extends MapInstance,
+  D extends Record<string, any>,
+  F extends Record<string, any>
+>(
+  props: Record<string, any>,
+  amapInitCb: (
+    amapInstance: AMap.Map,
+    coverProps: Record<string, any>
+  ) => T | Promise<T>,
+  transferredProps?: {
+    converters?: Converters<D>
+    handlers?: Handlers<F>
+  },
   amapPromise?: Promise<AMap.Map>
 ) {
   const amapInstance = shallowRef<AMap.Map | null>(null)
+  const amapComponent = shallowRef<T | null>(null)
+  const coverPropsUnWatch = shallowRef<WatchStopHandle[]>([])
 
   let getAmapInstancePromise!: Promise<AMap.Map>
 
@@ -48,34 +42,41 @@ export function useRegisterComponent(
     ) as Promise<AMap.Map>
   }
 
-  watch(
-    () => props.events,
-    (npEvents) => {
-      if (amapInstance.value) {
-        unregisterEvents(amapInstance.value)
-        if (npEvents) {
-          registerEvents(amapInstance.value, props)
-        }
-      }
+  onMounted(async () => {
+    const amapObj = await getAmapInstancePromise
+    amapInstance.value = amapObj
+    const amapComponentInit = amapInitCb(
+      amapInstance.value,
+      convertProps(props, transferredProps ? transferredProps.converters : {})
+    )
+    if (amapComponentInit instanceof Promise) {
+      const comInstance = await amapComponentInit
+      amapComponent.value = comInstance
+    } else {
+      amapComponent.value = amapComponentInit
     }
-  )
 
-  onMounted(() => {
-    getAmapInstancePromise.then((amapObj) => {
-      amapInstance.value = amapObj
-      registerEvents(amapInstance.value, props)
-    })
+    const { unwatchFns } = setPropWatchers(
+      props,
+      amapComponent.value,
+      transferredProps ? transferredProps.handlers : {},
+      transferredProps ? transferredProps.converters : {}
+    )
+    coverPropsUnWatch.value = unwatchFns
   })
 
   onUnmounted(() => {
-    if (amapInstance.value) {
-      eventHelper.clearListeners(amapInstance.value)
-      amapInstance.value.destroy()
+    if (amapComponent.value) {
+      unregisterEvents(amapComponent.value)
+      coverPropsUnWatch.value = unInstallWatchFns(coverPropsUnWatch.value)
     }
+
+    amapInstance.value?.destroy()
   })
 
   return {
     amapInstance,
     getAmapInstancePromise,
+    amapComponent,
   }
 }

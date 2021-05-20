@@ -13,7 +13,7 @@ const DEFAULT_AMP_CONFIG = {
   // 地图key
   key: null,
   // 地图版本号
-  v: '1.4.4',
+  v: '2.0',
   // 地图请求协议
   protocol: 'https',
   // 地图主域名

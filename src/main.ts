@@ -4,7 +4,8 @@ import Vue3Map from './index'
 
 Vue3Map.initMapApiLoader({
   key: '17baa62a7cc987d619f80dbeaa723620',
-  v: '1.4.15',
+  v: '2.0',
+  plugin: ['AMap.PolylineEditor', 'AMap.PolygonEditor'],
 })
 
 const app = createApp(App)

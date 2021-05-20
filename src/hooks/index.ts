@@ -1,2 +1,4 @@
 export { useRegisterComponent } from './registerComponents'
-export { initAmapComponent } from './initAmapComponent'
+export { registerEvents, unregisterEvents } from './rigisterEvents'
+export { convertProps, convertSignalProp } from './coverProps'
+export { setPropWatchers, unInstallWatchFns } from './setPropWatchers'
