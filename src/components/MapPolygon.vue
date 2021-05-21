@@ -20,7 +20,9 @@ export default defineComponent({
     'strokeStyle',
     'strokeDasharray',
     // 其他属性
+    'visible',
     'editable',
+    'events',
   ],
 
   setup(props, { expose }) {
@@ -34,12 +36,14 @@ export default defineComponent({
           map: amapInstance,
         })
 
-        if (AMap.PolygonEditor) {
-          editor.value = new AMap.PolygonEditor(amapInstance, polygon)
-        } else {
-          console.warn(
-            '如果需要使用VMapPolygon组件editable功能，务必添加AMap.PolygonEditor plugin'
-          )
+        if ('editable' in convertProps) {
+          if (AMap.PolygonEditor) {
+            editor.value = new AMap.PolygonEditor(amapInstance, polygon)
+          } else {
+            console.warn(
+              '如果需要使用VMapPolygon组件editable功能，务必添加AMap.PolygonEditor plugin'
+            )
+          }
         }
 
         return polygon

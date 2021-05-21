@@ -10,6 +10,8 @@ export type MapInstance =
   | AMap.Polyline
   | AMap.Polygon
 
+export type MapListenerInstance = AMap.Map | AMap.Marker | AMap.Polygon
+
 export type MapEditor =
   | AMap.PolylineEditor
   | AMap.PolygonEditor

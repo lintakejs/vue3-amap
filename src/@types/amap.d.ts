@@ -1969,44 +1969,6 @@ declare global {
       getEvents(): Record<string, any[]>
     }
 
-    export class event {
-      /**
-       * @private
-       */
-      static addListener(
-        intance: any,
-        eventName: string,
-        cb: any,
-        context?: any
-      ): EventListener
-      /**
-       * @private
-       */
-      static addListenerOnce(
-        intance: any,
-        eventName: string,
-        cb: any,
-        context?: any
-      ): EventListener
-      /**
-       * @private
-       */
-      static trigger(intance: any, eventName: string, data: any): void
-      /**
-       * @private
-       */
-      static addDomListener(
-        intance: HTMLElement,
-        eventName: string,
-        cb: any,
-        context?: any
-      ): EventListener
-      /**
-       * @private
-       */
-      static removeListener(listener: EventListener): void
-    }
-
     /**
      * @public
      * @private
@@ -5966,6 +5928,10 @@ declare global {
      */
     export class PolygonEditor extends CoreEditor {
       constructor(map: Map_2, polygon?: Polygon, opts?: any)
+    }
+
+    export class CircleEditor extends CoreEditor {
+      constructor(map: Map_2, polygon?: Circle, opts?: any)
     }
 
     export class CoreEditor {

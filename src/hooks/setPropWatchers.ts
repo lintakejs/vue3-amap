@@ -15,6 +15,31 @@ function getHandlerFun<T extends Record<string, any>>(
   return amapInstance[`set${upperCamelCase(prop)}`] || amapInstance.setOptions
 }
 
+export function propWatchFn<T extends Record<string, any>>(
+  propsData: T,
+  key: string,
+  amapInstance: MapInstance,
+  handleFun: Function,
+  converters?: Converters<T>
+) {
+  if (key === 'events') {
+    unregisterEvents(amapInstance)
+    registerEvents(amapInstance, propsData)
+    return
+  }
+
+  if (handleFun && handleFun === (amapInstance as any).setOptions) {
+    return handleFun.call(amapInstance, {
+      [key]: convertSignalProp(key, propsData[key], converters),
+    })
+  }
+
+  handleFun.call(
+    amapInstance,
+    convertSignalProp(key, propsData[key], converters)
+  )
+}
+
 export function unInstallWatchFns(unwatchFns: WatchStopHandle[]) {
   unwatchFns.forEach((unwatch) => unwatch())
   return []
@@ -28,26 +53,13 @@ export function setPropWatchers<T extends Record<string, any>>(
 ) {
   const unwatchFns = [] as WatchStopHandle[]
   Object.keys(propsData).forEach((prop) => {
-    const handleProp = prop
-    const handleFun = getHandlerFun(handleProp, amapInstance, handlers)
+    const handleFun = getHandlerFun(prop, amapInstance, handlers)
     if (!handleFun && prop !== 'events') return
-
+    propWatchFn(propsData, prop, amapInstance, handleFun, converters)
     const unWatch = watch(
       () => propsData[prop],
-      (nv) => {
-        if (prop === 'events') {
-          unregisterEvents(amapInstance)
-          registerEvents(amapInstance, propsData)
-          return
-        }
-
-        if (handleFun && handleFun === (amapInstance as any).setOptions) {
-          return handleFun.call(amapInstance, {
-            [handleProp]: convertSignalProp(prop, nv, converters),
-          })
-        }
-
-        handleFun.call(amapInstance, convertSignalProp(prop, nv, converters))
+      () => {
+        propWatchFn(propsData, prop, amapInstance, handleFun, converters)
       }
     )
 

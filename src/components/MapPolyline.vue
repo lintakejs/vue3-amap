@@ -38,12 +38,15 @@ export default defineComponent({
           ...convertProps,
           map: amapInstance,
         })
-        if (AMap.PolylineEditor) {
-          editor.value = new AMap.PolylineEditor(amapInstance, polyLine)
-        } else {
-          console.warn(
-            '如果需要使用VMapPolyline组件editable功能，务必添加AMap.PolylineEditor plugin'
-          )
+
+        if ('editable' in convertProps) {
+          if (AMap.PolylineEditor) {
+            editor.value = new AMap.PolylineEditor(amapInstance, polyLine)
+          } else {
+            console.warn(
+              '如果需要使用VMapPolyline组件editable功能，务必添加AMap.PolylineEditor plugin'
+            )
+          }
         }
 
         return polyLine
