@@ -6,8 +6,9 @@ import MapMarker from './components/MapMarker.vue'
 import MapPolyline from './components/MapPolyline.vue'
 import MapPolygon from './components/MapPolygon.vue'
 import MapCircle from './components/MapCircle.vue'
+import MapText from './components/MapText.vue'
 
-const components = [Map, MapMarker, MapPolyline, MapPolygon, MapCircle]
+const components = [Map, MapMarker, MapPolyline, MapPolygon, MapCircle, MapText]
 
 const Vue3Map = {
   initMapApiLoader,

@@ -27,7 +27,6 @@ export function propWatchFn<T extends Record<string, any>>(
     registerEvents(amapInstance, propsData)
     return
   }
-
   if (handleFun && handleFun === (amapInstance as any).setOptions) {
     return handleFun.call(amapInstance, {
       [key]: convertSignalProp(key, propsData[key], converters),
