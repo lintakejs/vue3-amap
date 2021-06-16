@@ -1,0 +1,11 @@
+{
+  "name": "vue3-amap",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "linwei9208 <linwei9208@zto.com>",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@vue3-amap/vmap": "^0.0.0"
+  }
+}
