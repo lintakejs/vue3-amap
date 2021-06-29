@@ -15,13 +15,14 @@ declare type MapInstance =
   | AMap.Icon
   | AMap.Polyline
   | AMap.Polygon
+  | AMap.ContextMenu
 
 declare type MapListenerInstance = AMap.Map | AMap.Marker | AMap.Polygon
 
 declare type MapEditor =
   | AMap.PolylineEditor
   | AMap.PolygonEditor
-  | AMap.CoreEditor
+  | AMap.CircleEditor
 
 declare interface MapConfig {
   key: string
@@ -34,10 +35,6 @@ declare interface MapConfig {
 
 declare interface ListenerHash {
   [key: string]: Array<EventListener>
-}
-
-declare type Handlers<T extends Record<string, any>> = {
-  [key in keyof T]: (...args: any[]) => void
 }
 
 declare interface PluginOptions {

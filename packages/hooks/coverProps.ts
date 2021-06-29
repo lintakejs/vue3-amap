@@ -1,6 +1,6 @@
 import { Converters } from './type'
 
-export function convertSignalProp<T extends Record<string, any>>(
+export function convertSignalProp<T = Record<string, any>>(
   key: keyof T,
   sourceData: any,
   converter?: Converters<Partial<T>>,
@@ -17,7 +17,7 @@ export function convertSignalProp<T extends Record<string, any>>(
  * @param converters 地图实例重新赋值为地图数据实例的参数
  * @returns 地图options
  */
-export function convertProps<T extends Record<string, any>>(
+export function convertProps<T = Record<string, any>>(
   propsData: T,
   converters?: Converters<Partial<T>>,
 ) {

@@ -16,128 +16,41 @@ export default defineComponent({
   name: 'VMap',
 
   props: {
-    center: {
-      type: Array as PropType<number[]>,
-      default: () => ([]),
-    },
-    zoom: {
-      type: Number,
-      default: 0,
-    },
-    rotation: {
-      type: Number,
-      default: 0,
-    },
-    pitch: {
-      type: Number,
-      default: 0,
-    },
-    viewMode: {
-      type: String as PropType<'2D' | '3D'>,
-      default: '2D',
-    },
-    features: {
-      type: Array as PropType<string[]>,
-      default: () => ([]),
-    },
-    layers: {
-      type: Array as PropType<AMap.TileLayer[]>,
-      default: () => ([]),
-    },
-    zooms: {
-      type: Array as PropType<number[]>,
-      default: () => ([]),
-    },
-    dragEnable: {
-      type: Boolean,
-      default: true,
-    },
-    zoomEnable: {
-      type: Boolean,
-      default: true,
-    },
-    jogEnable: {
-      type: Boolean,
-      default: true,
-    },
-    pitchEnable: {
-      type: Boolean,
-      default: true,
-    },
-    rotateEnable: {
-      type: Boolean,
-      default: true,
-    },
-    animateEnable: {
-      type: Boolean,
-      default: true,
-    },
-    keyboardEnable: {
-      type: Boolean,
-      default: true,
-    },
-    doubleClickZoom: {
-      type: Boolean,
-      default: true,
-    },
-    scrollWheel: {
-      type: Boolean,
-      default: true,
-    },
-    touchZoom: {
-      type: Boolean,
-      default: true,
-    },
-    touchZoomCenter: {
-      type: Number,
-      default: 1,
-    },
-    showLabel: {
-      type: Boolean,
-      default: true,
-    },
-    defaultCursor: {
-      type: String,
-    },
-    isHotspot: {
-      type: Boolean,
-    },
-    mapStyle: {
-      type: String,
-    },
-    wallColor: {
-      type: [String, Array] as PropType<string | number[]>,
-    },
-    roofColor: {
-      type: [String, Array] as PropType<string | number[]>,
-    },
-    showBuildingBlock: {
-      type: Boolean,
-      default: true,
-    },
-    showIndoorMap: {
-      type: Boolean,
-      default: false,
-    },
-    skyColor: {
-      type: [String, Array] as PropType<string | number[]>,
-    },
-    labelRejectMask: {
-      type: Boolean,
-      default: false,
-    },
-    mask: {
-      type: Array as PropType<number[]>,
-    },
-    plugins: {
-      type: Array,
-    },
-    events: {
-      type: Array,
-    },
-    onceEvents: {
-      type: Array,
-    },
+    center: Array as PropType<number[]>,
+    zoom: Number,
+    rotation: Number,
+    pitch: Number,
+    viewMode: String as PropType<'2D' | '3D'>,
+    features: Array as PropType<string[]>,
+    layers: Array as PropType<AMap.TileLayer[]>,
+    zooms: Array as PropType<number[]>,
+    dragEnable: Boolean,
+    zoomEnable: Boolean,
+    jogEnable: Boolean,
+    pitchEnable: Boolean,
+    rotateEnable: Boolean,
+    animateEnable: Boolean,
+    keyboardEnable: Boolean,
+    doubleClickZoom: Boolean,
+    scrollWheel: Boolean,
+    touchZoom: Boolean,
+    touchZoomCenter: Number,
+    showLabel: Boolean,
+    defaultCursor: String,
+    isHotspot: Boolean,
+    mapStyle: String,
+    wallColor: [String, Array] as PropType<string | number[]>,
+    roofColor: [String, Array] as PropType<string | number[]>,
+    showBuildingBlock: Boolean,
+    showIndoorMap: Boolean,
+    skyColor: [String, Array] as PropType<string | number[]>,
+    labelRejectMask: Boolean,
+    mask: Array as PropType<number[]>,
+    // plugins
+    plugins: Array as PropType<PluginOptions[]>,
+    // 事件属性
+    events: Array,
+    onceEvents: Array,
   },
 
   setup(props, { expose }) {

@@ -1,5 +1,6 @@
 import type { App } from 'vue'
 import VMap from '@vue3-amap/vmap'
+// import VMapCirCle from '@vue3-amap/vmap-circle'
 
 const components = [
   VMap,

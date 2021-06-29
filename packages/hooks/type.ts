@@ -1,5 +1,5 @@
 
-import { commonConvertMap } from '@/packages/utils/cover-helper'
+import { commonConvertMap } from '@/utils/cover-helper'
 
 export type ConverterKey = keyof typeof commonConvertMap
 export type ConverterFn =
@@ -7,9 +7,9 @@ export type ConverterFn =
   | MapInstance
 
 export type Converters<T extends Record<string, any>> = {
-  [key in keyof T]: (...args: any[]) => ConverterFn
+  [key in keyof T]?: (val: T[key]) => ConverterFn
 }
 
 export type Handlers<T extends Record<string, any>> = {
-  [key in keyof T]: (...args: any[]) => void
+  [key in keyof T]?: (val: T[key]) => void
 }

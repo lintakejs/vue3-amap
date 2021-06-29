@@ -3198,7 +3198,7 @@ declare global {
     /**
      * @public
      */
-    interface LabelOptions {
+    export interface LabelOptions {
       content: string
       offset: Pixel | Vector2 | number[]
       direction: string
