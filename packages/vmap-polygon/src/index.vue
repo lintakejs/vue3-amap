@@ -29,7 +29,7 @@ export default defineComponent({
   },
 
   setup(props, { expose }) {
-    const { amapComponent, editor } = useRegisterComponent(props, {
+    const { amapComponent, editor } = useRegisterComponent<AMap.Polygon, typeof props>(props, {
       amapInitCb: (amapInstance, convertProps: any) => {
         return new AMap.Polygon({
           ...convertProps,
@@ -48,7 +48,7 @@ export default defineComponent({
     },
     {
       handlers: {
-        visible(flag) {
+        visible: flag => {
           flag === false
             ? amapComponent.value.hide()
             : amapComponent.value.show()
