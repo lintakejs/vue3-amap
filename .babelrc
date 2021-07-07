@@ -1,6 +1,0 @@
-{
-  "presets": ["env"],
-  "plugins": [
-    "@vue/babel-plugin-jsx"
-  ]
-}

@@ -1,4 +1,4 @@
-const noVAmapPrefixFile = /(utils|config|services)/
+const noVAmapPrefixFile = /(utils|config|services|theme-chalk)/
 
 module.exports = {
   noVAmapPrefixFile: noVAmapPrefixFile,

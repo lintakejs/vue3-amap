@@ -16,7 +16,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["packages/*"]
+      "@/*": ["packages/*"],
+      "website/*": ["website/*"]
     }
   },
   "exclude": [

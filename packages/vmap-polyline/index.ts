@@ -1,11 +1,11 @@
 import { App } from 'vue'
 import { SFCWithInstall } from '../utils/type'
-import vMapPolyline from './src/index.vue'
+import VMapPolyline from './src/index.vue'
 
-vMapPolyline.install = (app: App): void => {
-  app.component(vMapPolyline.name, vMapPolyline)
+VMapPolyline.install = (app: App): void => {
+  app.component(VMapPolyline.name, VMapPolyline)
 }
 
-const _VMap: SFCWithInstall<typeof vMapPolyline> = vMapPolyline
+const _VMap: SFCWithInstall<typeof VMapPolyline> = VMapPolyline
 
 export default _VMap

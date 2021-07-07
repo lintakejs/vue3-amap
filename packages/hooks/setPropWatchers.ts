@@ -27,9 +27,17 @@ export function propWatchFn<T = Record<string, any>, E = MapEditor>(
     editInit: (...args: any[]) => E
   },
 ) {
-  if (key === 'events') {
+  if (propsData[key] === undefined) {
+    return
+  }
+  if (key === 'events' || key === 'onceEvents') {
     unregisterEvents(amapInstance)
-    registerEvents(amapInstance, propsData)
+    registerEvents(amapInstance, propsData, ['events', 'onceEvents'])
+    return
+  }
+  if (key === 'editEvents') {
+    unregisterEvents(editInfo.edit.value)
+    registerEvents(editInfo.edit.value, propsData, ['editEvents'])
     return
   }
   if (handleFun && handleFun === (amapInstance as any).setOptions) {
@@ -40,8 +48,10 @@ export function propWatchFn<T = Record<string, any>, E = MapEditor>(
 
   if (key === 'editable') {
     const editCoverPorpsData = convertSignalProp(key, propsData[key], converters)
-    if (editCoverPorpsData instanceof Boolean && editCoverPorpsData === true && editInfo.edit.value === null) {
+    if (editCoverPorpsData === true && editInfo.edit.value === undefined) {
       editInfo.edit.value = editInfo.editInit()
+      unregisterEvents(editInfo.edit.value)
+      registerEvents(editInfo.edit.value, propsData, ['editEvents'])
     }
   }
 

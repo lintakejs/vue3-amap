@@ -206,7 +206,7 @@ export function useRegisterComponent<
       if ('close' in componentInstance) {
         componentInstance.close()
       }
-
+      unregisterEvents(editorInstance)
       editorInstance && editorInstance.close()
     }
   })

@@ -3,26 +3,82 @@ import { defineComponent, PropType } from 'vue'
 import { useRegisterComponent } from '@/hooks'
 
 export default defineComponent({
+  name: 'VMapText',
+
   props: {
-    position: Array as PropType<number[]>,
-    text: Object as PropType<AMap.LabelOptions>,
-    title: String,
-    visible: Boolean,
-    zIndex: Number,
-    offset: Array as PropType<number[]>,
-    anchor: String as PropType<'top-left'|'top-center'|'top-right'|'middle-left'|'center'|'middle-right'|'bottom-left'|'bottom-center'|'bottom-right'>,
-    angle: Number,
-    clickable: Boolean,
-    draggable: Boolean,
-    bubble: Boolean,
-    zooms: Array as PropType<number[]>,
-    cursor: String,
-    topWhenClick: Boolean,
-    extData: Object,
-    style: Object,
+    position: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    text: {
+      type: [String, Object] as PropType<AMap.LabelOptions | string>,
+      default: undefined,
+    },
+    title: {
+      type: String,
+      default: undefined,
+    },
+    visible: {
+      type: Boolean,
+      default: undefined,
+    },
+    zIndex: {
+      type: Number,
+      default: undefined,
+    },
+    offset: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    anchor: {
+      type: String as PropType<'top-left'|'top-center'|'top-right'|'middle-left'|'center'|'middle-right'|'bottom-left'|'bottom-center'|'bottom-right'>,
+      default: undefined,
+    },
+    angle: {
+      type: Number,
+      default: undefined,
+    },
+    clickable: {
+      type: Boolean,
+      default: undefined,
+    },
+    draggable: {
+      type: Boolean,
+      default: undefined,
+    },
+    bubble: {
+      type: Boolean,
+      default: undefined,
+    },
+    zooms: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    cursor: {
+      type: String,
+      default: undefined,
+    },
+    topWhenClick: {
+      type: Boolean,
+      default: undefined,
+    },
+    extData: {
+      type: Object,
+      default: undefined,
+    },
+    style: {
+      type: Object,
+      default: undefined,
+    },
     // 事件属性
-    events: Object,
-    onceEvents: Object,
+    events: {
+      type: Object,
+      default: undefined,
+    },
+    onceEvents: {
+      type: Object,
+      default: undefined,
+    },
   },
 
   setup(props, { expose }) {
@@ -50,7 +106,7 @@ export default defineComponent({
       },
     )
     expose({ amapComponent })
-    return null
+    return () => null
   },
 })
 </script>

@@ -6,26 +6,82 @@ export default defineComponent({
   name: 'VMapPolygon',
 
   props: {
-    path: Array,
-    zIndex: Number,
-    bubble: Boolean,
-    cursor: String,
-    strokeColor: String,
-    strokeOpacity: Number,
-    strokeWeight: Number,
-    fillColor: String,
-    fillOpacity: Number,
-    draggable: Boolean,
-    extData: Object,
-    strokeStyle: String as PropType<'solid' | 'dashed'>,
-    strokeDasharray: Array as PropType<number[]>,
+    path: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    zIndex: {
+      type: Number,
+      default: undefined,
+    },
+    bubble: {
+      type: Boolean,
+      default: undefined,
+    },
+    cursor: {
+      type: String,
+      default: undefined,
+    },
+    strokeColor: {
+      type: String,
+      default: undefined,
+    },
+    strokeOpacity: {
+      type: Number,
+      default: undefined,
+    },
+    strokeWeight: {
+      type: Number,
+      default: undefined,
+    },
+    fillColor: {
+      type: String,
+      default: undefined,
+    },
+    fillOpacity: {
+      type: Number,
+      default: undefined,
+    },
+    draggable: {
+      type: Boolean,
+      default: undefined,
+    },
+    extData: {
+      type: Object,
+      default: undefined,
+    },
+    strokeStyle: {
+      type: String as PropType<'solid' | 'dashed'>,
+      default: undefined,
+    },
+    strokeDasharray: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
     // visible
-    visible: Boolean,
-    // 是否可编辑
-    editable: Boolean,
+    visible: {
+      type: Boolean,
+      default: undefined,
+    },
     // 事件属性
-    events: Object,
-    onceEvents: Object,
+    events: {
+      type: Object,
+      default: undefined,
+    },
+    onceEvents: {
+      type: Object,
+      default: undefined,
+    },
+    // 是否可编辑
+    editable: {
+      type: Boolean,
+      default: undefined,
+    },
+    // 编辑器实例绑定事件
+    editEvents: {
+      type: Object,
+      default: undefined,
+    },
   },
 
   setup(props, { expose }) {
@@ -41,7 +97,7 @@ export default defineComponent({
           return new AMap.PolygonEditor(amapInstance, amapComponentInstance)
         } else {
           console.warn(
-            '如果需要使用VMapCircle组件editable功能，务必添加AMap.CircleEditor plugin',
+            '如果需要使用VMapCircle组件editable功能，务必添加AMap.PolygonEditor plugin',
           )
         }
       },
@@ -54,7 +110,9 @@ export default defineComponent({
             : amapComponent.value.show()
         },
         editable: edit => {
-          edit === true ? editor.value.open() : editor.value.close()
+          if (editor.value) {
+            edit === true ? editor.value.open() : editor.value.close()
+          }
         },
       },
     })
@@ -64,7 +122,7 @@ export default defineComponent({
       editor,
     })
 
-    return null
+    return () => null
   },
 })
 </script>

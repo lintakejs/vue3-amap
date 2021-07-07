@@ -16,41 +16,144 @@ export default defineComponent({
   name: 'VMap',
 
   props: {
-    center: Array as PropType<number[]>,
-    zoom: Number,
-    rotation: Number,
-    pitch: Number,
-    viewMode: String as PropType<'2D' | '3D'>,
-    features: Array as PropType<string[]>,
-    layers: Array as PropType<AMap.TileLayer[]>,
-    zooms: Array as PropType<number[]>,
-    dragEnable: Boolean,
-    zoomEnable: Boolean,
-    jogEnable: Boolean,
-    pitchEnable: Boolean,
-    rotateEnable: Boolean,
-    animateEnable: Boolean,
-    keyboardEnable: Boolean,
-    doubleClickZoom: Boolean,
-    scrollWheel: Boolean,
-    touchZoom: Boolean,
-    touchZoomCenter: Number,
-    showLabel: Boolean,
-    defaultCursor: String,
-    isHotspot: Boolean,
-    mapStyle: String,
-    wallColor: [String, Array] as PropType<string | number[]>,
-    roofColor: [String, Array] as PropType<string | number[]>,
-    showBuildingBlock: Boolean,
-    showIndoorMap: Boolean,
-    skyColor: [String, Array] as PropType<string | number[]>,
-    labelRejectMask: Boolean,
-    mask: Array as PropType<number[]>,
+    center: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    zoom: {
+      type: Number,
+      default: undefined,
+    },
+    rotation: {
+      type: Number,
+      default: undefined,
+    },
+    pitch: {
+      type: Number,
+      default: undefined,
+    },
+    viewMode: {
+      type: String as PropType<'2D' | '3D'>,
+      default: '2D',
+    },
+    features: {
+      type: Array as PropType<string[]>,
+      default: undefined,
+    },
+    layers: {
+      type: Array as PropType<AMap.TileLayer[]>,
+      default: undefined,
+    },
+    zooms: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    resizeEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    dragEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    zoomEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    jogEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    pitchEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    rotateEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    animateEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    keyboardEnable: {
+      type: Boolean,
+      default: undefined,
+    },
+    doubleClickZoom: {
+      type: Boolean,
+      default: undefined,
+    },
+    scrollWheel: {
+      type: Boolean,
+      default: undefined,
+    },
+    touchZoom: {
+      type: Boolean,
+      default: undefined,
+    },
+    touchZoomCenter: {
+      type: Number,
+      default: undefined,
+    },
+    showLabel: {
+      type: Boolean,
+      default: undefined,
+    },
+    defaultCursor: {
+      type: String,
+      default: undefined,
+    },
+    isHotspot: {
+      type: Boolean,
+      default: undefined,
+    },
+    mapStyle: {
+      type: String,
+      default: undefined,
+    },
+    wallColor: {
+      type: [String, Array] as PropType<string | number[]>,
+      default: undefined,
+    },
+    roofColor: {
+      type: [String, Array] as PropType<string | number[]>,
+      default: undefined,
+    },
+    showBuildingBlock: {
+      type: Boolean,
+      default: undefined,
+    },
+    showIndoorMap: {
+      type: Boolean,
+      default: undefined,
+    },
+    skyColor: {
+      type: [String, Array] as PropType<string | number[]>,
+      default: undefined,
+    },
+    labelRejectMask: {
+      type: Boolean,
+      default: undefined,
+    },
+    mask: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
     // plugins
-    plugins: Array as PropType<PluginOptions[]>,
+    plugins: {
+      type: Array as PropType<PluginOptions[]>,
+      default: undefined,
+    },
     // 事件属性
-    events: Array,
-    onceEvents: Array,
+    events: {
+      type: Object,
+      default: undefined,
+    },
+    onceEvents: {
+      type: Object,
+      default: undefined,
+    },
   },
 
   setup(props, { expose }) {
@@ -144,11 +247,11 @@ export default defineComponent({
     }
 
     const converters = {
-      center: (arr: number[]) => {
-        return toLngLat(arr)
+      center: (arr?: number[]) => {
+        return arr instanceof Array && arr.length === 2 ? toLngLat(arr) : null
       },
       plugins: (pluginList: string[] | PluginOptions[]) => {
-        return pluginList.map((oPlugin: string | PluginOptions) => {
+        return (pluginList || []).map((oPlugin: string | PluginOptions) => {
           let nPlugin = {}
 
           if (typeof oPlugin === 'string') {
@@ -184,14 +287,14 @@ export default defineComponent({
       {
         converters,
         handlers: {
-          zoom: flag => {
-            amapComponent.value?.setStatus({
-              zoomEnable: flag,
-            })
-          },
           dragEnable: flag => {
             amapComponent.value?.setStatus({
               dragEnable: flag,
+            })
+          },
+          zoomEnable: flag => {
+            amapComponent.value?.setStatus({
+              zoomEnable: flag,
             })
           },
           rotateEnable: flag => {
@@ -199,6 +302,27 @@ export default defineComponent({
               rotateEnable: flag,
             })
           },
+          doubleClickZoom: flag => {
+            amapComponent.value?.setStatus({
+              doubleClickZoom: flag,
+            })
+          },
+          scrollWheel: flag => {
+            amapComponent.value?.setStatus({
+              scrollWheel: flag,
+            })
+          },
+          jogEnable: flag => {
+            amapComponent.value?.setStatus({
+              jogEnable: flag,
+            })
+          },
+          keyboardEnable: flag => {
+            amapComponent.value?.setStatus({
+              keyboardEnable: flag,
+            })
+          },
+
         },
       },
       amapPromise,

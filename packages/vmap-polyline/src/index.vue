@@ -6,28 +6,102 @@ export default defineComponent({
   name: 'VMapPolyline',
 
   props: {
-    path: Array,
-    zIndex: Number,
-    bubble: Boolean,
-    cursor: String,
-    strokeColor: String,
-    strokeOpacity: Number,
-    strokeWeight: Number,
-    borderWeight: Number,
-    isOutline: Boolean,
-    outlineColor: String,
-    draggable: Boolean,
-    extData: Object,
-    strokeStyle: String as PropType<'solid' | 'dashed'>,
-    strokeDasharray: Array as PropType<number[]>,
-    lineJoin: String as PropType<'miter' | 'round' | 'bevel'>,
-    lineCap: String as PropType<'butt' | 'round' | 'square'>,
-    geodesic: Boolean,
-    showDir: Boolean,
+    path: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    zIndex: {
+      type: Number,
+      default: undefined,
+    },
+    bubble: {
+      type: Boolean,
+      default: undefined,
+    },
+    cursor: {
+      type: String,
+      default: undefined,
+    },
+    strokeColor: {
+      type: String,
+      default: undefined,
+    },
+    strokeOpacity: {
+      type: Number,
+      default: undefined,
+    },
+    strokeWeight: {
+      type: Number,
+      default: undefined,
+    },
+    borderWeight: {
+      type: Number,
+      default: undefined,
+    },
+    isOutline: {
+      type: Boolean,
+      default: undefined,
+    },
+    outlineColor: {
+      type: String,
+      default: undefined,
+    },
+    draggable: {
+      type: Boolean,
+      default: undefined,
+    },
+    extData: {
+      type: Object,
+      default: undefined,
+    },
+    strokeStyle: {
+      type: String as PropType<'solid' | 'dashed'>,
+      default: undefined,
+    },
+    strokeDasharray: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    lineJoin: {
+      type: String as PropType<'miter' | 'round' | 'bevel'>,
+      default: undefined,
+    },
+    lineCap: {
+      type: String as PropType<'butt' | 'round' | 'square'>,
+      default: undefined,
+    },
+    geodesic: {
+      type: Boolean,
+      default: undefined,
+    },
+    showDir: {
+      type: Boolean,
+      default: undefined,
+    },
     // 是否展示
-    visible: Boolean,
+    visible: {
+      type: Boolean,
+      default: undefined,
+    },
+    // 事件属性
+    events: {
+      type: Object,
+      default: undefined,
+    },
+    onceEvents: {
+      type: Object,
+      default: undefined,
+    },
     // 是否可编辑
-    editable: Boolean,
+    editable: {
+      type: Boolean,
+      default: undefined,
+    },
+    // 编辑器实例绑定事件
+    editEvents: {
+      type: Object,
+      default: undefined,
+    },
   },
 
   setup(props, { expose }) {
@@ -58,7 +132,9 @@ export default defineComponent({
               : amapComponent.value?.show()
           },
           editable: edit => {
-            edit === true ? editor.value?.open() : editor.value?.close()
+            if (editor.value) {
+              edit === true ? editor.value?.open() : editor.value?.close()
+            }
           },
         },
       },
@@ -68,7 +144,7 @@ export default defineComponent({
       amapComponent,
     })
 
-    return null
+    return () => null
   },
 })
 </script>

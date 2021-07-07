@@ -10,6 +10,7 @@ module.exports = {
     '@babel/typescript',
   ],
   plugins: [
+    '@vue/babel-plugin-jsx',
     '@babel/transform-runtime',
   ],
   overrides: [

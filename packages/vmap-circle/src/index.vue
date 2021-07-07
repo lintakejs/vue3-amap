@@ -7,22 +7,81 @@ export default defineComponent({
   name: 'VMapCircle',
 
   props: {
-    center: Array as PropType<number[]>,
-    radius: Number,
-    zIndex: Number,
-    bubble: Boolean,
-    cursor: String,
-    strokeColor: String,
-    strokeOpacity: Number,
-    strokeWeight: Number,
-    fillColor: String,
-    fillOpacity: Number,
-    draggable: Boolean,
-    extData: Object,
-    strokeStyle: String as PropType<'solid' | 'dashed'>,
-    strokeDasharray: Array as PropType<number[]>,
+    center: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    radius: {
+      type: Number,
+      default: undefined,
+    },
+    zIndex: {
+      type: Number,
+      default: undefined,
+    },
+    bubble: {
+      type: Boolean,
+      default: undefined,
+    },
+    cursor: {
+      type: String,
+      default: undefined,
+    },
+    strokeColor: {
+      type: String,
+      default: undefined,
+    },
+    strokeOpacity: {
+      type: Number,
+      default: undefined,
+    },
+    strokeWeight: {
+      type: Number,
+      default: undefined,
+    },
+    fillColor: {
+      type: String,
+      default: undefined,
+    },
+    fillOpacity: {
+      type: Number,
+      default: undefined,
+    },
+    draggable: {
+      type: Boolean,
+      default: undefined,
+    },
+    extData: {
+      type: Object,
+      default: undefined,
+    },
+    strokeStyle: {
+      type: String as PropType<'solid' | 'dashed'>,
+      default: undefined,
+    },
+    strokeDasharray: {
+      type: Array as PropType<number[]>,
+      default: undefined,
+    },
+    // 事件属性
+    events: {
+      type: Object,
+      default: undefined,
+    },
+    onceEvents: {
+      type: Object,
+      default: undefined,
+    },
     // 是否可编辑
-    editable: Boolean,
+    editable: {
+      type: Boolean,
+      default: undefined,
+    },
+    // 编辑器实例绑定事件
+    editEvents: {
+      type: Object,
+      default: undefined,
+    },
   },
 
   setup(props, { expose }) {
@@ -56,7 +115,9 @@ export default defineComponent({
         },
         handlers: {
           editable: edit => {
-            edit === true ? editor.value.open() : editor.value.close()
+            if (editor.value) {
+              edit === true ? editor.value.open() : editor.value.close()
+            }
           },
         },
       },
@@ -67,7 +128,7 @@ export default defineComponent({
       editor,
     })
 
-    return null
+    return () => null
   },
 })
 </script>

@@ -1,17 +1,24 @@
-export function registerEvents(amapInstance: any, props: Record<string, any>) {
-  if (props.events) {
-    for (const eventName in props.events) {
-      amapInstance.on && amapInstance.on(eventName, props.events[eventName])
-    }
+export function registerEvents(amapInstance: any, props: Record<string, any>, eventKeys: string[]) {
+  if (!amapInstance) {
+    return
   }
-  if (props.onceEvents) {
-    for (const eventName in props.onceEvents) {
-      amapInstance.on &&
-        amapInstance.on(eventName, props.onceEvents[eventName], null, true)
+  eventKeys.map(key => {
+    if (props[key]) {
+      for (const eventName in props[key]) {
+        if (key.includes('once')) {
+          amapInstance.on &&
+            amapInstance.on(eventName, props[key][eventName], null, true)
+        } else {
+          amapInstance.on && amapInstance.on(eventName, props[key][eventName])
+        }
+      }
     }
-  }
+  })
 }
 
 export function unregisterEvents(amapInstance: any) {
+  if (!amapInstance) {
+    return
+  }
   amapInstance.clearEvents && amapInstance.clearEvents('')
 }
