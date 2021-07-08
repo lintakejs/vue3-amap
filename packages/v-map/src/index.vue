@@ -6,11 +6,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, onUnmounted, shallowRef, PropType } from 'vue'
-import { lazyMapApiLoaderInstance } from '@/services/injected-map-api'
-import { guid } from '@/utils/guid'
-import { convertProps, useRegisterComponent } from '@/hooks'
-import { toLngLat, toPixel } from '@/utils/cover-helper'
-import { parseFullName, parseShortName } from '@/utils/parsePluginName'
+import { lazyMapApiLoaderInstance } from '@vue3-amap/services/injected-map-api'
+import { guid } from '@vue3-amap/utils/guid'
+import { convertProps, useRegisterComponent } from '@vue3-amap/hooks'
+import { toLngLat, toPixel } from '@vue3-amap/utils/cover-helper'
+import { parseFullName, parseShortName } from '@vue3-amap/utils/parsePluginName'
 
 export default defineComponent({
   name: 'VMap',

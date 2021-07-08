@@ -13,12 +13,7 @@
     "lib": [
       "ESNext", "DOM"
     ],
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["packages/*"],
-      "website/*": ["website/*"]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules"

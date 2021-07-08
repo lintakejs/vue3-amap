@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { useRegisterComponent } from '@/hooks'
+import { useRegisterComponent } from '@vue3-amap/hooks'
 
 export default defineComponent({
   name: 'VMapText',

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { useRegisterComponent } from '@/hooks'
-import { toLngLat } from '@/utils/cover-helper'
+import { useRegisterComponent } from '@vue3-amap/hooks'
+import { toLngLat } from '@vue3-amap/utils/cover-helper'
 
 export default defineComponent({
   name: 'VMapCircle',
