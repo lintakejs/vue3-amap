@@ -139,6 +139,41 @@ declare const _default: import("vue").DefineComponent<{
 }, {
     mapUid: string;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+    center?: unknown;
+    zoom?: unknown;
+    rotation?: unknown;
+    pitch?: unknown;
+    viewMode?: unknown;
+    features?: unknown;
+    layers?: unknown;
+    zooms?: unknown;
+    resizeEnable?: unknown;
+    dragEnable?: unknown;
+    zoomEnable?: unknown;
+    jogEnable?: unknown;
+    pitchEnable?: unknown;
+    rotateEnable?: unknown;
+    animateEnable?: unknown;
+    keyboardEnable?: unknown;
+    doubleClickZoom?: unknown;
+    scrollWheel?: unknown;
+    touchZoom?: unknown;
+    touchZoomCenter?: unknown;
+    showLabel?: unknown;
+    defaultCursor?: unknown;
+    isHotspot?: unknown;
+    mapStyle?: unknown;
+    wallColor?: unknown;
+    roofColor?: unknown;
+    showBuildingBlock?: unknown;
+    showIndoorMap?: unknown;
+    skyColor?: unknown;
+    labelRejectMask?: unknown;
+    mask?: unknown;
+    plugins?: unknown;
+    events?: unknown;
+    onceEvents?: unknown;
+} & {
     viewMode: "2D" | "3D";
 } & {
     center?: number[];

@@ -72,7 +72,26 @@ declare const _default: import("vue").DefineComponent<{
         type: ObjectConstructor;
         default: any;
     };
-}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{} & {
+}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+    center?: unknown;
+    radius?: unknown;
+    zIndex?: unknown;
+    bubble?: unknown;
+    cursor?: unknown;
+    strokeColor?: unknown;
+    strokeOpacity?: unknown;
+    strokeWeight?: unknown;
+    fillColor?: unknown;
+    fillOpacity?: unknown;
+    draggable?: unknown;
+    extData?: unknown;
+    strokeStyle?: unknown;
+    strokeDasharray?: unknown;
+    events?: unknown;
+    onceEvents?: unknown;
+    editable?: unknown;
+    editEvents?: unknown;
+} & {} & {
     center?: number[];
     radius?: number;
     zIndex?: number;

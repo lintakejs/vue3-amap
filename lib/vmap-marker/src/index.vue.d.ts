@@ -76,7 +76,27 @@ declare const _default: import("vue").DefineComponent<{
         type: ObjectConstructor;
         default: any;
     };
-}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{} & {
+}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+    position?: unknown;
+    icon?: unknown;
+    content?: unknown;
+    title?: unknown;
+    visible?: unknown;
+    zIndex?: unknown;
+    offset?: unknown;
+    anchor?: unknown;
+    angle?: unknown;
+    clickable?: unknown;
+    draggable?: unknown;
+    bubble?: unknown;
+    zooms?: unknown;
+    cursor?: unknown;
+    topWhenClick?: unknown;
+    label?: unknown;
+    extData?: unknown;
+    events?: unknown;
+    onceEvents?: unknown;
+} & {} & {
     position?: unknown[];
     icon?: string | AMap.Icon;
     content?: any;
