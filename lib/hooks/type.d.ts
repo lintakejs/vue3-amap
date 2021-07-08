@@ -1,4 +1,4 @@
-import { commonConvertMap } from '@/utils/cover-helper';
+import { commonConvertMap } from '@vue3-amap/utils/cover-helper';
 export declare type ConverterKey = keyof typeof commonConvertMap;
 export declare type ConverterFn = ReturnType<typeof commonConvertMap[ConverterKey]> | MapInstance;
 export declare type Converters<T extends Record<string, any>> = {

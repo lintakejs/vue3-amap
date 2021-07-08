@@ -1,5 +1,5 @@
 import { App } from 'vue'
-import { SFCWithInstall } from '../utils/type'
+import { SFCWithInstall } from '@vue3-amap/utils/type'
 import VMapPolygon from './src/index.vue'
 
 VMapPolygon.install = (app: App): void => {

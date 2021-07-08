@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "uppercamelcase": "^3.0.0",
-    "vue": "^3.0.5"
+    "vue": "^3.0.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",

@@ -1,5 +1,5 @@
 
-import { commonConvertMap } from '@/utils/cover-helper'
+import { commonConvertMap } from '@vue3-amap/utils/cover-helper'
 
 export type ConverterKey = keyof typeof commonConvertMap
 export type ConverterFn =

@@ -1,4 +1,4 @@
-import { getScriptSrc } from '../utils/getScriptSrc'
+import { getScriptSrc } from '@vue3-amap/utils/getScriptSrc'
 
 const MAP_SCRIPT_INIT_CALLBACK = 'mapScriptInitCallback'
 

@@ -1,5 +1,5 @@
 import { App } from 'vue'
-import { SFCWithInstall } from '../utils/type'
+import { SFCWithInstall } from '@vue3-amap/utils/type'
 import VMapPolyline from './src/index.vue'
 
 VMapPolyline.install = (app: App): void => {
