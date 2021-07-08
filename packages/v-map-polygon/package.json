@@ -1,5 +1,5 @@
 {
-  "name": "@vue3-amap/vmap",
+  "name": "@vue3-amap/v-map-polygon",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",

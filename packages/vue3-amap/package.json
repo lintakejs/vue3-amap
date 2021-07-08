@@ -6,8 +6,11 @@
   "license": "ISC",
   "main": "index.js",
   "dependencies": {
-    "@vue3-amap/vmap": "^0.0.0",
-    "@vue3-amap/vmap-circle": "^0.0.0",
-    "@vue3-amap/vmap-marker": "^0.0.0"
+    "@vue3-amap/v-map": "^0.0.0",
+    "@vue3-amap/v-map-circle": "^0.0.0",
+    "@vue3-amap/v-map-marker": "^0.0.0",
+    "@vue3-amap/v-map-polygon": "^0.0.0",
+    "@vue3-amap/v-map-polyline": "^0.0.0",
+    "@vue3-amap/v-map-text": "^0.0.0"
   }
 }

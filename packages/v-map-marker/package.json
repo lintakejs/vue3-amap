@@ -1,5 +1,5 @@
 {
-  "name": "@vue3-amap/vmap-text",
+  "name": "@vue3-amap/v-map-marker",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
