@@ -1,7 +1,7 @@
 {
   "name": "vue3-amap",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "lintakejs <lintakejs@github.io>",
   "homepage": "http://121.5.161.224:8001/",
   "scripts": {
