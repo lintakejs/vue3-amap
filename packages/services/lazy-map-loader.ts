@@ -1,11 +1,5 @@
 import { getScriptSrc } from '../utils/getScriptSrc'
 
-declare global {
-  interface Window {
-    mapScriptInitCallback: () => any
-  }
-}
-
 const MAP_SCRIPT_INIT_CALLBACK = 'mapScriptInitCallback'
 
 const DEFAULT_AMP_CONFIG = {

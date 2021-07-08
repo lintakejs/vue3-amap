@@ -16,7 +16,9 @@
     "build:services": "babel packages/services --extensions .ts --out-dir lib/services",
     "build:config": "babel packages/config --extensions .ts --out-dir lib/config",
     "build:theme": "rimraf packages/theme-chalk/lib && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk && rimraf packages/theme-chalk/lib",
-    "docs:dev": "vitepress dev docs"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "peerDependencies": {
     "vue": "^3.0.9"

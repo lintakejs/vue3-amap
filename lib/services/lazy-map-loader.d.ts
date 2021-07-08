@@ -1,8 +1,3 @@
-declare global {
-    interface Window {
-        mapScriptInitCallback: () => any;
-    }
-}
 export default class MapApiLoader {
     private config;
     private scriptLoadingPromise;
