@@ -20,10 +20,28 @@ Vue3Amap.initMapApiLoader({
 const app = createApp(App)
 app.use(Vue3Map)
 ```
-或者
+或者使用按需加载
 ```js
+// 配置babel
+plugin: [
+  [
+    "component",
+    {
+      libraryName: "vue3-amap",
+      styleLibrary: {
+        name: "theme-chalk",
+        base: false
+      }
+    },
+    "vue3-amap"
+  ]
+]
+```
+```js
+// 按需加载
 import { createApp } from 'vue'
-import { initMapApiLoader, VMap, VMapMarker } from 'vue3-amap'
+import { VMap, VMapMarker } from 'vue3-amap'
+import { initMapApiLoader } from 'vue3-amap/lib/v-map'
 // 目前只支持 高德地图v2.0 的sdk
 initMapApiLoader({
   key: 'xxxxxx',
