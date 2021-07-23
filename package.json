@@ -1,5 +1,6 @@
 {
   "name": "vue3-amap",
+  "private": true,
   "version": "1.0.5",
   "author": "lintakejs <lintakejs@github.io>",
   "homepage": "http://121.5.161.224:8001/",
@@ -25,8 +26,7 @@
     "vue": "^3.0.9"
   },
   "dependencies": {
-    "uppercamelcase": "^3.0.0",
-    "vue": "^3.0.9"
+    "uppercamelcase": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
@@ -58,7 +58,8 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "^4.3.2",
-    "vitepress": "^0.15.5"
+    "vitepress": "^0.15.5",
+    "vue": "^3.0.9"
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --fix"
