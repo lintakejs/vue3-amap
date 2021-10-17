@@ -28,7 +28,7 @@ function ready() {
 ```js
 // app.js
 import { initMapApiLoader, VMap } from 'vue3-amap'
-// 地图组件需要先注册下载使用
+// 地图组件需要先注册
 initMapApiLoader({
   key: 'xxx'
 })
@@ -49,6 +49,11 @@ app.component(VMap.name, VMap)
 | plugins   | 插件列表     | PluginOptions[] | — | — |
 | events | 绑定事件 | Record<string, Function> | — | — |
 | onceEvents | 绑定事件，只触发一次 | Record<string, Function> | — | — |
+
+refs提供重新下载的钩子，以及准备完毕与对象生成失败的钩子。
+reloadAmapInstance() 可以重新发起地图sdk下载，同时重新生成渲染对象与事件绑定，之前的绑定则时效。
+@map-sdk-down-failed sdk下载失败会触发此事件。
+@map-ready 地图主对象准备完毕，只有 VMap 组件提供。
 ```js
 // 类型注释
 interface PluginOptions {
