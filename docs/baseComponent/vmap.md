@@ -1,8 +1,27 @@
+<script setup>
+import { ref } from 'vue'
+
+const mapRef = ref(null)
+let value = 0
+function downFail() {
+  console.log(mapRef.value)
+  if(mapRef.value && !value) {
+    setTimeout(() => {
+      value++
+      mapRef.value.reloadAmapInstance()
+    }, 10000)
+  }
+}
+
+function ready() {
+  console.log('ready')
+}
+</script>
 # 地图基类
 地图组件都应该在此基础组件中slot使用
 
 <ClientOnly>
-  <VMap class="map-box" resizeEnable />
+  <VMap class="map-box" resizeEnable ref="mapRef" @map-sdk-down-failed="downFail" @map-ready="ready" />
 </ClientOnly>
 
 ### demo代码
@@ -14,6 +33,7 @@ initMapApiLoader({
   key: 'xxx'
 })
 app.component(VMap.name, VMap)
+
 // demo.vue
 <template>
   <VMap />

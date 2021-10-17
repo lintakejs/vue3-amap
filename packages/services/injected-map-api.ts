@@ -7,7 +7,6 @@ export const initMapApiLoader = function (config: MapConfig) {
     throw new Error('You has already initial map instance, just import it!')
   }
   lazyMapApiLoaderInstance = new MapApiLoader(config)
-  lazyMapApiLoaderInstance.loader()
 }
 
 export { lazyMapApiLoaderInstance }

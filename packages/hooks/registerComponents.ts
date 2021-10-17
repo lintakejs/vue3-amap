@@ -1,8 +1,9 @@
 import { Converters, Handlers } from './type'
 import { AmapPromise } from '@vue3-amap/config/symbolVariable'
 import {
+  watch,
   inject,
-  onMounted,
+  // onMounted,
   onUnmounted,
   provide,
   shallowRef,
@@ -30,40 +31,52 @@ export function useRegisterComponent<
     converters?: Converters<D>
     handlers?: Handlers<D>
   },
-  amapPromise?: Promise<AMap.Map>,
+  getAmapPromise?: () => Promise<AMap.Map>,
 ) {
   const amapInstance = shallowRef<AMap.Map | null>(null)
   const amapComponent = shallowRef<T | null>(null)
   const editor = shallowRef<E | undefined>(undefined)
   const coverPropsUnWatch = shallowRef<WatchStopHandle[]>([])
 
-  let getAmapInstancePromise!: Promise<AMap.Map>
-
-  if (amapPromise) {
-    getAmapInstancePromise = amapPromise
-    provide(AmapPromise, amapPromise)
+  const getAmapInstancePromise = shallowRef<Promise<AMap.Map>>()
+  if (Object.prototype.toString.call(getAmapPromise) === '[object Function]') {
+    getAmapInstancePromise.value = getAmapPromise()
+    provide(AmapPromise, getAmapInstancePromise)
   } else {
-    getAmapInstancePromise = inject<Promise<AMap.Map>>(
+    getAmapInstancePromise.value = inject<Promise<AMap.Map>>(
       AmapPromise,
     ) as Promise<AMap.Map>
   }
 
-  onMounted(async () => {
-    const amapObj = await getAmapInstancePromise
+  const amapInstanceWatcher = watch(() => getAmapInstancePromise.value, newAmapInstancePromise => {
+    newAmapInstancePromise.then(() => {
+      unAmapObj()
+      initAmapObj()
+    })
+  }, { immediate: true })
+
+  function reloadAmapInstancePromise(reloadPromise: () => Promise<AMap.Map>) {
+    getAmapInstancePromise.value = reloadPromise()
+    getAmapInstancePromise.value.then(() => {
+      unAmapObj()
+      initAmapObj()
+    })
+  }
+
+  async function initAmapObj() {
+    const amapObj = await getAmapInstancePromise.value
     amapInstance.value = amapObj
     const converterProps = convertProps(props, transferredProps?.converters)
     const amapComponentInit = initFn.amapInitCb(
       amapInstance.value,
       converterProps,
     )
-
-    if (amapComponentInit instanceof Promise) {
+    if (Object.prototype.toString.call(amapComponentInit) === '[object Promise]') {
       const comInstance = await amapComponentInit
       amapComponent.value = comInstance
     } else {
       amapComponent.value = amapComponentInit
     }
-
     const { unwatchFns } = setPropWatchers(
       props,
       amapComponent.value,
@@ -81,9 +94,9 @@ export function useRegisterComponent<
       },
     )
     coverPropsUnWatch.value = unwatchFns
-  })
+  }
 
-  onUnmounted(() => {
+  function unAmapObj() {
     const componentInstance = amapComponent.value
     const editorInstance = editor.value
 
@@ -98,10 +111,17 @@ export function useRegisterComponent<
       unregisterEvents(editorInstance)
       editorInstance && editorInstance.close()
     }
+    coverPropsUnWatch.value.forEach(unwatch => unwatch())
+  }
+
+  onUnmounted(() => {
+    unAmapObj()
+    amapInstanceWatcher()
   })
 
   return {
     amapComponent,
     editor,
+    reloadAmapInstancePromise,
   }
 }

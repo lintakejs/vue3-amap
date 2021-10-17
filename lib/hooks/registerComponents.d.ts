@@ -5,7 +5,8 @@ export declare function useRegisterComponent<T extends MapInstance, D extends Re
 }, transferredProps?: {
     converters?: Converters<D>;
     handlers?: Handlers<D>;
-}, amapPromise?: Promise<AMap.Map>): {
+}, getAmapPromise?: () => Promise<AMap.Map>): {
     amapComponent: T extends import("vue").Ref<any> ? T : import("vue").Ref<T>;
     editor: E extends import("vue").Ref<any> ? E : import("vue").Ref<E>;
+    reloadAmapInstancePromise: (reloadPromise: () => Promise<AMap.Map>) => void;
 };

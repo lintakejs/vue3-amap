@@ -44,6 +44,10 @@ export default class MapApiLoader {
 
   private scriptLoadingPromise!: Promise<void>
 
+  private scriptLoadingPromiseResolve!: boolean
+
+  private scriptDom: HTMLScriptElement
+
   constructor(config: MapConfig) {
     this.config = {
       ...DEFAULT_AMP_CONFIG,
@@ -55,17 +59,25 @@ export default class MapApiLoader {
    * @returns {Promise<void>}
    */
   loader() {
-    if (this.scriptLoadingPromise) return this.scriptLoadingPromise
+    if (this.scriptLoadingPromiseResolve) return this.scriptLoadingPromise
+    this.scriptLoadingPromiseResolve = true
+    if (this.scriptDom) {
+      document.head.removeChild(this.scriptDom)
+      this.scriptDom = null
+    }
     const script = document.createElement('script')
     script.type = 'text/javascript'
-    script.async = true
     script.defer = true
     script.src = getScriptSrc(this.config)
+    this.scriptDom = script
     this.scriptLoadingPromise = new Promise((resolve, reject) => {
       window[MAP_SCRIPT_INIT_CALLBACK] = () => {
         return resolve()
       }
-      script.onerror = error => reject(error)
+      script.onerror = error => {
+        this.scriptLoadingPromiseResolve = false
+        reject(error)
+      }
     })
     document.head.append(script)
 

@@ -138,7 +138,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, {
     mapUid: string;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("map-sdk-down-failed" | "map-ready")[], "map-sdk-down-failed" | "map-ready", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
     center?: unknown;
     zoom?: unknown;
     rotation?: unknown;

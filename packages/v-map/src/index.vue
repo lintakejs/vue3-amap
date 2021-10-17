@@ -156,8 +156,9 @@ export default defineComponent({
     },
   },
 
-  setup(props, { expose }) {
-    const mapApiLoadPromise = lazyMapApiLoaderInstance?.loader()
+  emits: ['map-sdk-down-failed', 'map-ready'],
+
+  setup(props, { expose, emit }) {
     const mapUid = guid()
     const pluginInstanceList = shallowRef<any[]>([])
     const pluginInstanceListenerList = shallowRef<PluginListener[]>([])
@@ -182,7 +183,7 @@ export default defineComponent({
       plugins: PluginOptions[] | undefined,
       mapInstance: AMap.Map,
     ) {
-      if (!(plugins instanceof Array)) {
+      if (!(Array.isArray(plugins))) {
         return
       }
       let _notInjectPlugins = plugins.filter(
@@ -270,17 +271,20 @@ export default defineComponent({
       },
     }
     // 获取地图实例的promise，异步加载，并初始化地图控件
-    const amapPromise = new Promise<AMap.Map>(resolve => {
-      mapApiLoadPromise?.then(() => {
-        resolve(new AMap.Map(mapUid, convertProps(props, converters)))
+    function getReloadAmapPromise () {
+      const amapPromise = lazyMapApiLoaderInstance.loader().then(() => new AMap.Map(mapUid, convertProps(props, converters)))
+      amapPromise.catch(e => {
+        emit('map-sdk-down-failed', e)
       })
-    })
+      return amapPromise
+    }
 
-    const { amapComponent } = useRegisterComponent(
+    const { amapComponent, reloadAmapInstancePromise } = useRegisterComponent(
       props,
       {
         amapInitCb: (amapInstance, convertProps) => {
           addPlugins(convertProps.plugins, amapInstance)
+          emit('map-ready')
           return amapInstance
         },
       },
@@ -325,7 +329,7 @@ export default defineComponent({
 
         },
       },
-      amapPromise,
+      getReloadAmapPromise,
     )
 
     onUnmounted(() => {
@@ -335,6 +339,9 @@ export default defineComponent({
 
     expose({
       amapComponent,
+      reloadAmapInstance: () => {
+        reloadAmapInstancePromise(getReloadAmapPromise)
+      },
     })
 
     return {
