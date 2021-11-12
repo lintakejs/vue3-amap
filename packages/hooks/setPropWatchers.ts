@@ -1,8 +1,8 @@
 import { Ref, watch, WatchStopHandle } from 'vue'
 import upperCamelCase from 'uppercamelcase'
-import { Converters, Handlers } from './type'
-import { unregisterEvents, registerEvents } from './rigisterEvents'
-import { convertSignalProp } from './coverProps'
+import { Converters, Handlers } from '@vue3-amap/hooks/type'
+import { unregisterEvents, registerEvents } from '@vue3-amap/hooks/rigisterEvents'
+import { convertSignalProp } from '@vue3-amap/hooks/coverProps'
 
 function getHandlerFun<T extends Record<string, any>>(
   prop: string,

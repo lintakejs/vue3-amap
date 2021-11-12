@@ -97,14 +97,14 @@ declare const _default: import("vue").DefineComponent<{
     events?: unknown;
     onceEvents?: unknown;
 } & {} & {
+    anchor?: string;
     position?: unknown[];
     icon?: string | AMap.Icon;
-    content?: any;
+    content?: string | Record<string, any>;
     title?: string;
     visible?: boolean;
     zIndex?: number;
     offset?: unknown[];
-    anchor?: string;
     angle?: number;
     clickable?: boolean;
     draggable?: boolean;
@@ -117,14 +117,14 @@ declare const _default: import("vue").DefineComponent<{
     events?: Record<string, any>;
     onceEvents?: Record<string, any>;
 }>, {
+    anchor: string;
     position: unknown[];
     icon: string | AMap.Icon;
-    content: any;
+    content: string | Record<string, any>;
     title: string;
     visible: boolean;
     zIndex: number;
     offset: unknown[];
-    anchor: string;
     angle: number;
     clickable: boolean;
     draggable: boolean;

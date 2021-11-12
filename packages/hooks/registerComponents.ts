@@ -1,4 +1,4 @@
-import { Converters, Handlers } from './type'
+import { Converters, Handlers } from '@vue3-amap/hooks/type'
 import { AmapPromise } from '@vue3-amap/config/symbolVariable'
 import {
   watch,
@@ -9,9 +9,9 @@ import {
   shallowRef,
   WatchStopHandle,
 } from 'vue'
-import { convertProps } from './coverProps'
-import { unregisterEvents } from './rigisterEvents'
-import { setPropWatchers } from './setPropWatchers'
+import { convertProps } from '@vue3-amap/hooks/coverProps'
+import { unregisterEvents } from '@vue3-amap/hooks/rigisterEvents'
+import { setPropWatchers } from '@vue3-amap/hooks/setPropWatchers'
 
 export function useRegisterComponent<
   T extends MapInstance,
@@ -38,14 +38,14 @@ export function useRegisterComponent<
   const editor = shallowRef<E | undefined>(undefined)
   const coverPropsUnWatch = shallowRef<WatchStopHandle[]>([])
 
-  const getAmapInstancePromise = shallowRef<Promise<AMap.Map>>()
+  let getAmapInstancePromise = shallowRef<Promise<AMap.Map>>()
   if (Object.prototype.toString.call(getAmapPromise) === '[object Function]') {
     getAmapInstancePromise.value = getAmapPromise()
     provide(AmapPromise, getAmapInstancePromise)
   } else {
-    getAmapInstancePromise.value = inject<Promise<AMap.Map>>(
+    getAmapInstancePromise = inject<typeof getAmapInstancePromise>(
       AmapPromise,
-    ) as Promise<AMap.Map>
+    )
   }
 
   const amapInstanceWatcher = watch(() => getAmapInstancePromise.value, newAmapInstancePromise => {

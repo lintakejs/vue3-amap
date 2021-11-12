@@ -12,24 +12,24 @@ const editEvent = ref({ 'move': (e) => { console.log('move', e) } })
 
 <ClientOnly>
   <VMap class="map-box" resizeEnable :center="[116.397428, 39.90923]" :zoom="13">
-    <VMapCircle 
-      strokeColor="#F33" 
-      fillColor="#ee2200" 
-      :fillOpacity="0.35" 
-      :center="center" 
-      :radius="1000" 
-      :strokeOpacity="1" 
-      :strokeWeight="3"
-      :events="event"
-      :editable="editable"
-      :editEvents="editEvent"
-    />
-    <div class="input-card" style="width: 12rem;">
-      <div class="input-item">
-        <input class="btn" type="button" value="开始编辑" @click="editable = true" />
-        <input class="btn" type="button" value="结束编辑" @click="editable = false" />
-      </div>
+  <VMapCircle 
+    strokeColor="#F33" 
+    fillColor="#ee2200" 
+    :fillOpacity="0.35" 
+    :center="center" 
+    :radius="1000" 
+    :strokeOpacity="1" 
+    :strokeWeight="3"
+    :events="event"
+    :editable="editable"
+    :editEvents="editEvent"
+  />
+  <div class="input-card" style="width: 12rem;">
+    <div class="input-item">
+      <input class="btn" type="button" value="开始编辑" @click="editable = true" />
+      <input class="btn" type="button" value="结束编辑" @click="editable = false" />
     </div>
+  </div>
   </VMap>
 </ClientOnly>
 

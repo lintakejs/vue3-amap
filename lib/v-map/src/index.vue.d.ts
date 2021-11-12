@@ -209,7 +209,10 @@ declare const _default: import("vue").DefineComponent<{
     plugins?: PluginOptions[];
     events?: Record<string, any>;
     onceEvents?: Record<string, any>;
-}>, {
+}> & {
+    "onMap-sdk-down-failed"?: (...args: any[]) => any;
+    "onMap-ready"?: (...args: any[]) => any;
+}, {
     center: number[];
     zoom: number;
     rotation: number;

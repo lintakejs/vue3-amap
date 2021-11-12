@@ -1,4 +1,4 @@
-import MapApiLoader from './lazy-map-loader'
+import MapApiLoader from '@vue3-amap/services/lazy-map-loader'
 
 let lazyMapApiLoaderInstance: MapApiLoader | null = null
 

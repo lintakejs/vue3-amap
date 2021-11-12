@@ -92,13 +92,13 @@ declare const _default: import("vue").DefineComponent<{
     events?: unknown;
     onceEvents?: unknown;
 } & {} & {
+    anchor?: "top-left" | "top-center" | "top-right" | "middle-left" | "center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
     position?: number[];
     text?: string | AMap.LabelOptions;
     title?: string;
     visible?: boolean;
     zIndex?: number;
     offset?: number[];
-    anchor?: "top-left" | "top-center" | "top-right" | "middle-left" | "center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
     angle?: number;
     clickable?: boolean;
     draggable?: boolean;
@@ -111,13 +111,13 @@ declare const _default: import("vue").DefineComponent<{
     events?: Record<string, any>;
     onceEvents?: Record<string, any>;
 }>, {
+    anchor: "top-left" | "top-center" | "top-right" | "middle-left" | "center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
     position: number[];
     text: string | AMap.LabelOptions;
     title: string;
     visible: boolean;
     zIndex: number;
     offset: number[];
-    anchor: "top-left" | "top-center" | "top-right" | "middle-left" | "center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
     angle: number;
     clickable: boolean;
     draggable: boolean;

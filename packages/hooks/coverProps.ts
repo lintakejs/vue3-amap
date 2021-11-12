@@ -1,4 +1,4 @@
-import { Converters } from './type'
+import { Converters } from '@vue3-amap/hooks/type'
 
 export function convertSignalProp<T = Record<string, any>>(
   key: keyof T,
